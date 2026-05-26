@@ -92,7 +92,7 @@ static MEDIA_ID_QUERY_TAGS: &[&str] = &[
     "SeasonId",
     "startItemId",
     "IDs",
-    "PersonIds"
+    "PersonIds",
 ];
 
 static USER_ID_PATH_TAGS: &[&str] = &["Users"];
@@ -641,11 +641,10 @@ pub async fn resolve_server(
 
     if let Some(sessions) = sessions {
         if let Some(request_server) = request_server {
-            if let Some((session, server)) = sessions.iter().find(|(_, server)| {
-                let request_url = request_server.url.as_str().trim_end_matches('/');
-                let server_url = server.url.as_str().trim_end_matches('/');
-                request_url == server_url
-            }) {
+            if let Some((session, server)) = sessions
+                .iter()
+                .find(|(_, server)| request_server.id == server.id)
+            {
                 debug!("Found server in request: {}", server.url);
                 return Ok((server.clone(), Some(session.clone())));
             }
