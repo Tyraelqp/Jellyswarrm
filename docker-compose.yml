@@ -6,10 +6,12 @@ services:
     image: jellyswarrm-proxy:latest
     container_name: jellyswarrm-proxy
     ports:
-      - "3000:3000"
+      - "8090:3000"
     volumes:
       - ./data:/app/data
+    extra_hosts:
+      - 'lj1.tyraelqp.top:host-gateway'
     environment:
       - JELLYSWARRM_USERNAME=admin
-      - JELLYSWARRM_PASSWORD=jellyswarrm # Change this in production!
+      - JELLYSWARRM_PASSWORD=qweqweqwe # Change this in production!
       - RUST_LOG=jellyswarrm_proxy=debug 

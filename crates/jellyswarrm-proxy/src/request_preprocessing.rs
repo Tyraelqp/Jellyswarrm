@@ -81,6 +81,7 @@ static MEDIA_ID_PATH_TAGS: &[&str] = &[
     "UserFavoriteItems",
     "UserItems",
     "UserPlayedItems",
+    "Playlists",
 ];
 
 static MEDIA_ID_QUERY_TAGS: &[&str] = &[

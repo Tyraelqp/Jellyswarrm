@@ -193,7 +193,9 @@ pub async fn handle_authenticate_by_name(
         }
     }
 
-    if is_existing_user {
+    let always_authenticate = true;
+
+    if is_existing_user && !always_authenticate {
         if !servers.is_empty() {
             info!(
                 "Skipping {} unmapped servers for existing user '{}' during login",
@@ -202,7 +204,6 @@ pub async fn handle_authenticate_by_name(
             );
         }
     } else {
-        // For first-time users we still probe all configured servers so mappings can be created.
         let mut leftover_tasks: Vec<_> = servers
             .into_iter()
             .map(|server| {
